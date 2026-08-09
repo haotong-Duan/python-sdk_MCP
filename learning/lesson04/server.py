@@ -1,17 +1,23 @@
-from logging import error
-
 from mcp.server import MCPServer
 
 mcp = MCPServer(
     "Prompt Demo"
 )
 
-@mcp.prompt()
-def explain_code(code: str):
+@mcp.tool()
+def add_numbers(a: int, b: int):
     """
-    Explain a piece of code.
+    Add two numbers together.
     """
-    return f"You are an expert Python engineer. Explain the following code: python {code}"
+    return a + b
+
+
+@mcp.resource("device://{device_id}")
+def get_device_info(device_id: str):
+    """
+    Get information about a device.
+    """
+    return f"Device info for {device_id}"
 
 @mcp.prompt()
 def debug_python(
@@ -25,11 +31,11 @@ def debug_python(
 
 @mcp.prompt()
 def review_code(
-    code:str
-    language:str="python"
+    code:str,
+    language:str="python",
     level:str="expert"
 ):
     """
     Review a piece of code.
     """
-    return f"You are an expert Python engineer. Review the following code: python {code}. Please follow these steps: 1. Analyze code 2. Provide feedback 3. Suggest improvements."
+    return f"You are an expert {language} engineer. Review the following code: python {code} with level {level}. Please follow these steps: 1. Analyze code 2. Provide feedback 3. Suggest improvements."

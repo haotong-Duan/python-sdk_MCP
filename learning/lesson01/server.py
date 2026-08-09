@@ -8,7 +8,7 @@ import os
 mcp = MCPServer("My First MCP Server")
 
 @mcp.tool()
-def add(a: int, b: int) -> int:
+def add(a: int, b: int) -> int:       # schema(to json): {"a": "int", "b": "int"} -> int
     """Add two numbers."""
     return a + b
 
